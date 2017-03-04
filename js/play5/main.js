@@ -28,8 +28,9 @@ function Play5Canvas(width = -1, height = -1) {
   this.canvas.width  = this.width;
   this.canvas.height = this.height;
 
-  this.canvas.addEventListener("click", MouseClick);
+  this.canvas.addEventListener("mousedown", MouseClick);
 
+  window.addEventListener("resize", ResizeCanvas);
 
   if(this.isFullScreen) {
     this.canvas.setAttribute("style", "position: absolute; top: 0; left: 0;");
@@ -68,6 +69,7 @@ function PlayObject() {
   }
 
 }
+
 
 
 function GameLoop() {
