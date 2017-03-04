@@ -5,14 +5,21 @@ window.onload = function () {
 var game;
 var sqr;
 var circles = [];
-
+var socket;
+var ships = [];
 
 
 
 function Init() {
   game = new Play5Canvas();
-  setInterval(SpawnCircle, 1000);
+  socket = io.connect('http://192.168.0.12:3000');
+  socket.on("init", function(data) {
+    console.log(data);
+  });
 
+  socket.on("update", function(data) {
+    console.log(data);
+  });
 }
 
 function MouseClick() {
@@ -20,7 +27,7 @@ function MouseClick() {
   var mouseX = event.clientX;
   var mouseY = event.clientY;
   console.log("click at x: " + mouseX + " y: " + mouseY);
-
+  socket.emit("click send", mouseX);
   //Play5Canvas.ScheduleTask(SpawnCircle, 1);
   for(var i = circles.length - 1; i >= 0; i--) {
     var distX = circles[i].x - mouseX;
@@ -44,14 +51,7 @@ function SpawnCircle() {
 
 
 function Update() {
-  for(var i = circles.length - 1; i >= 0; i--) {
 
-    if(circles[i].y < 0) {
-        circles.splice(i, 1);
-    } else {
-      circles[i].Move(0, -1);
-    }
-  }
 }
 
 
