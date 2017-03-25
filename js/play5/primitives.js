@@ -7,9 +7,11 @@ function Primitive(x, y, context) {
     this.y = y;
   }
 
+//Move
+
   this.Move = function(x, y) {
-    this.x += x;
-    this.y += y;
+      this.x += x;
+      this.y += y;
   }
 
 }
